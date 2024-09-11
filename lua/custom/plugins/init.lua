@@ -13,7 +13,6 @@ return {
   },
   {
     'm4xshen/autoclose.nvim',
-    lazy = false,
     opts = {
       keys = {
         ['('] = { escape = false, close = true, pair = '()' },
@@ -40,12 +39,40 @@ return {
     },
   },
   {
-    'akinsho/bufferline.nvim',
-    version = 'v4.0.0',
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    lazy = false,
+    'ggandor/leap.nvim',
   },
   {
-    'ggandor/leap.nvim',
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = function()
+      require('lsp_lines').setup()
+      -- highlight_whole_line = false,
+      -- begin without it, use <Leader>d to turn it on.
+      vim.diagnostic.config { virtual_text = true, virtual_lines = false }
+      vim.keymap.set('', '<Leader>d', function()
+        if vim.diagnostic.config().virtual_text then
+          -- vim.diagnostic.config({ virtual_text = false, virtual_lines = { only_current_line = true } })
+          vim.diagnostic.config { virtual_text = false, virtual_lines = true }
+        else
+          vim.diagnostic.config { virtual_text = true, virtual_lines = false }
+        end
+      end, { desc = 'Toggle lsp_lines' })
+    end,
+  },
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    build = 'cd app && yarn install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
+  },
+  {
+    'iden3/vim-circom-syntax',
   },
 }
