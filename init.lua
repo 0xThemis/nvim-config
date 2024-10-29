@@ -797,11 +797,13 @@ vim.keymap.set('n', '<C-s>', '<cmd> w<CR>')
 vim.keymap.set('v', '>', '>gv')
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>') -- dont copy replaced text
-vim.keymap.set('n', '<leader>x', '<cmd>:bn|bd #<CR>') -- remove the current buffer from the list
+vim.keymap.set('n', '<leader>x', '<cmd>:bp|bd #<CR>') -- remove the current buffer from the list
 vim.keymap.set('n', '<leader>sp', function()
   vim.cmd ':set invspell'
   print 'toggling spell check'
 end) -- toggle spell check
+
+vim.vimtex_view_method = 'zathura'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
